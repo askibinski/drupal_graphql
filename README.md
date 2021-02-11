@@ -1,2 +1,2 @@
-# drupal_graphql
-D8 backend with Graphql API
+# Drupal 9
+D9 backend with Graphql API.
