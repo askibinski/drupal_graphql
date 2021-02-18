@@ -1,2 +1,3 @@
 # Drupal 9
-D9 backend with Graphql API.
+
+With lando support. Works together with a Lando git submodule.

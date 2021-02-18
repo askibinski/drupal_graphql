@@ -1,0 +1,60 @@
+config:
+  php: '7.4'
+  composer_version: '2.0.7'
+  via: apache:2.4
+  database: mysql:8.0
+  webroot: htdocs
+  config:
+    php: lando/config/php/php.ini
+
+proxy:
+  mailhog:
+    - "mailhog.drupal9.lndo.site"
+
+tooling:
+  drupal:
+    cmd: "/app/vendor/bin/drupal --root=/app/htdocs"
+  clean:
+    description: "Deleting resources"
+    service: appserver
+    cmd: bash /app/lando/scripts/clean.sh
+  phpunit:
+    service: appserver
+    description: "Run all tests, or pass the machine name of a module as argument to only run those tests."
+    level: app
+    cmd: bash /app/lando/scripts/phpunit.sh
+    options:
+      filter:
+        passthrough: true
+        describe: Filter for certain module
+        interactive:
+          type: input
+          message: Filter
+          default: '.'
+          weight: 600
+  redis-cli:
+    service: cache
+  update:
+    description: "Run drush updates"
+    service: appserver
+    cmd: bash /app/lando/scripts/update.sh
+  xdebug:
+    description: Loads Xdebug in the selected mode.
+    cmd:
+      - appserver: /app/lando/scripts/xdebug.sh
+    user: root
+
+services:
+  appserver:
+    overrides:
+      environment:
+        DRUSH_OPTIONS_ROOT: '/app/htdocs'
+        DRUSH_OPTIONS_URI: "https://drupal9.lndo.site"
+  cache:
+    type: redis:6
+    portforward: true
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
