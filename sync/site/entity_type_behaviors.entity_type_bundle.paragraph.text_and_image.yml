@@ -1,0 +1,4 @@
+behaviors:
+  custom_paragraphs_image_position:
+    enable: 1
+    config: 'a:0:{}'
