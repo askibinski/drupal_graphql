@@ -21,6 +21,7 @@ htdocs/sites/sites.php
 htdocs/sites/simpletest
 
 /settings
+.lando.base.yml
 
 # Local Unit testing files.
 /phpunit.log
