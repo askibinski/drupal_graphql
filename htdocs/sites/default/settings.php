@@ -4,7 +4,7 @@
 
 $databases = [];
 
-$settings["config_sync_directory"] = '../sync/site';
+$settings["config_sync_directory"] = '../sync';
 
 $settings['update_free_access'] = FALSE;
 
