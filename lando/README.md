@@ -11,7 +11,11 @@ Then run `lando start` in the project root.
 
 Then run `lando composer install` in the project root.
 
-Goto http://drupal9.lndo.site and isntall the site.
+Goto http://drupal9.lndo.site and install the site.
+
+Run lando drush config-set "system.site" uuid a0edf32d-f62b-40a2-b1ea-cad09de9b8d3 -y
+
+Run lando drush cim -y
 
 ## Lando tools
 On top of Lando default commands this project defines a custom set of tools.
