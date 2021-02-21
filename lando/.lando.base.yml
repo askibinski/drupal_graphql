@@ -43,6 +43,10 @@ tooling:
     cmd:
       - appserver: /app/lando/scripts/xdebug.sh
     user: root
+  npm:
+    service: node
+  npx:
+    service: node
 
 services:
   appserver:
@@ -58,3 +62,5 @@ services:
     portforward: true
     hogfrom:
       - appserver
+  node:
+    type: node
