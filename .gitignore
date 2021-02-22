@@ -28,6 +28,9 @@ htdocs/sites/simpletest
 /report.xml
 /output
 
+# node modules
+*/node_modules
+
 # PHPStorm.
 /.idea
 
