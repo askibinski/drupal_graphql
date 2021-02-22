@@ -33,16 +33,6 @@ class PageExtension extends SdlSchemaExtensionPluginBase {
         ->map('id', $builder->fromArgument('id'))
     );
 
-    // Resolve nodeByPath Query.
-    $registry->addFieldResolver('Query', 'nodeByPath',
-      $builder->compose(
-        $builder->produce('route_load')
-          ->map('path', $builder->fromArgument('path')),
-        $builder->produce('route_entity')
-          ->map('url', $builder->fromParent())
-      )
-    );
-
     // The Page entity (node) id.
     $registry->addFieldResolver('Page', 'id',
       $builder->produce('entity_id')
@@ -56,7 +46,7 @@ class PageExtension extends SdlSchemaExtensionPluginBase {
     );
 
     // The Page url alias.
-    $registry->addFieldResolver('Page', 'slug',
+    $registry->addFieldResolver('Page', 'path',
       $builder->compose(
         $builder->produce('entity_url')
           ->map('entity', $builder->fromParent()),
@@ -88,7 +78,7 @@ class PageExtension extends SdlSchemaExtensionPluginBase {
     $registry->addFieldResolver('Page', 'content',
       $builder->produce('entity_reference_revisions')
         ->map('entity', $builder->fromParent())
-        ->map('field', $builder->fromValue('field_paragraph_content'))
+        ->map('field', $builder->fromValue('field_content'))
     );
 
     $registry->addTypeResolver('NodeInterface', function ($value) {

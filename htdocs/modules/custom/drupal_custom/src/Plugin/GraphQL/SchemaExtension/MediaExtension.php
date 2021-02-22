@@ -32,6 +32,19 @@ class MediaExtension extends SdlSchemaExtensionPluginBase {
         ->map('entity', $builder->fromParent())
     );
 
+    // The url of the original image.
+    $registry->addFieldResolver('Image', 'url',
+      $builder->compose(
+      // Load the file object from the field.
+        $builder->fromPath('entity:media:image', 'field_media_image.target_id'),
+        $builder->produce('entity_load')
+          ->map('type', $builder->fromValue('file'))
+          ->map('id', $builder->fromParent()),
+        $builder->fromPath('entity:file', 'uri.value'),
+        $builder->produce('media_image_url')->map('uri', $builder->fromParent())
+      )
+    );
+
     // The image alt text.
     $registry->addFieldResolver('Image', 'alt',
       $builder->fromPath('entity:media:image', 'field_media_image.alt')
@@ -47,10 +60,6 @@ class MediaExtension extends SdlSchemaExtensionPluginBase {
       $builder->fromPath('entity:media:image', 'field_media_image.height')
     );
 
-    // The image style urls.
-    $this->addMediaImageStyleUrlField($registry, $builder, 'Image', 'image_url_small', 'content_small');
-    $this->addMediaImageStyleUrlField($registry, $builder, 'Image', 'image_url_large', 'content_large');
-
     // Response type resolvers. Tell GraphQL how to resolve types of a common
     // interface.
     $registry->addTypeResolver('MediaInterface', function ($value) {
@@ -65,42 +74,6 @@ class MediaExtension extends SdlSchemaExtensionPluginBase {
       throw new Error('Could not resolve media type: ' . $value->bundle());
     });
 
-  }
-
-  /**
-   * Adds a graphql field resolver for a specific image style.
-   *
-   * @param \Drupal\graphql\GraphQL\ResolverRegistryInterface $registry
-   *   The resolver registry.
-   * @param \Drupal\graphql\GraphQL\ResolverBuilder $builder
-   *   The resolver builder.
-   * @param string $type
-   *   The graphql Type.
-   * @param string $field
-   *   The desired graphql field name.
-   * @param string $image_style
-   *   The machine name of the image style to be used.
-   */
-  protected function addMediaImageStyleUrlField(ResolverRegistryInterface $registry, ResolverBuilder $builder, $type, $field, $image_style) {
-    $registry->addFieldResolver($type, $field,
-      $builder->compose(
-      // Load the file object from the field.
-        $builder->produce('property_path')
-          ->map('type', $builder->fromValue('entity:paragraph'))
-          ->map('value', $builder->fromParent())
-          ->map('path', $builder->fromValue('field_media_image.target_id')),
-        $builder->produce('entity_load')
-          ->map('type', $builder->fromValue('file'))
-          ->map('id', $builder->fromParent()),
-        // Load the image style derivative of the file.
-        $builder->produce('image_derivative')
-          ->map('entity', $builder->fromParent())
-          ->map('style', $builder->fromValue($image_style)),
-        // Retrieve the url of the generated image.
-        $builder->produce('image_style_url')
-          ->map('derivative', $builder->fromParent()),
-      )
-    );
   }
 
 }

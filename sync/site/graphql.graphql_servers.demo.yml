@@ -1,0 +1,18 @@
+uuid: c46a7492-2ec4-434d-9bac-f0683e2964de
+langcode: en
+status: true
+dependencies: {  }
+name: demo
+label: Demo
+schema: drupal_custom
+schema_configuration:
+  drupal_custom:
+    extensions:
+      drupal_custom_paragraph: drupal_custom_paragraph
+      drupal_custom_media: drupal_custom_media
+      drupal_custom_page: drupal_custom_page
+persisted_queries_settings: {  }
+endpoint: /graphql
+debug_flag: 1
+caching: false
+batching: false

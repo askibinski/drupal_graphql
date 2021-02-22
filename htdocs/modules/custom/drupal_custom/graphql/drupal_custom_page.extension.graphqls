@@ -1,4 +1,3 @@
 extend type Query {
   nodeByID(id: Int!): NodeInterface
-  nodeByPath(path: String!): NodeInterface
 }
