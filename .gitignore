@@ -35,6 +35,8 @@ htdocs/sites/simpletest
 /.editorconfig
 /.gitattributes
 
+# node modules
+*/node_modules
 
 # Adding artifacts.
 artifacts
