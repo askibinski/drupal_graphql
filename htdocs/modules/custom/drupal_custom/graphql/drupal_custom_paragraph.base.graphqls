@@ -1,0 +1,9 @@
+interface ParagraphInterface {
+  id: Int!
+}
+
+type ParagraphTextAndImage implements ParagraphInterface {
+  id: Int!
+  text: String!
+  image: [MediaInterface]
+}
