@@ -1,0 +1,6 @@
+/*
+  We're not using styles in this example. There are various ways to do this, and since we're using material-ui in this
+  example, it would make sense to implement "makeStyles": https://material-ui.com/styles/basics/
+
+  But there are many other ways to implement styling in React.
+ */
