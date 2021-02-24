@@ -36,14 +36,18 @@ const MY_QUERY = gql`
 
 export default function Home() {
 
+  // The recommended way is to pass the client via context, but to keep our demo simple we pass it in useQuery.
   const { loading, error, data } = useQuery(MY_QUERY, { client: client });
 
   if (loading) return <p>Loading...</p>;
+
   if (error) {
     console.log(error);
     return <p>Error :( (see console)</p>;
   }
 
+  // Of course this code will fail when something else than the expected TextAndImage paragraph is returned. But
+  // it is only for demo purposes.
   const props = {
     text: data.nodeByID.content[0].text,
     image: data.nodeByID.content[0].image[0]
