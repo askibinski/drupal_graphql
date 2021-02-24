@@ -21,7 +21,7 @@ const MY_QUERY = gql`
                 id
                 height
                 alt
-                url
+                src
                 width
               }
             }
@@ -39,7 +39,10 @@ export default function Home() {
   const { loading, error, data } = useQuery(MY_QUERY, { client: client });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (error) {
+    console.log(error);
+    return <p>Error :( (see console)</p>;
+  }
 
   const props = {
     text: data.nodeByID.content[0].text,
