@@ -33,7 +33,7 @@ class MediaExtension extends SdlSchemaExtensionPluginBase {
     );
 
     // The url of the original image.
-    $registry->addFieldResolver('Image', 'url',
+    $registry->addFieldResolver('Image', 'src',
       $builder->compose(
       // Load the file object from the field.
         $builder->fromPath('entity:media:image', 'field_media_image.target_id'),
