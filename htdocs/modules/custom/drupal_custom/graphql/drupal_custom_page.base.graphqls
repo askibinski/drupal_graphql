@@ -1,0 +1,7 @@
+type Page implements NodeInterface {
+  id: Int!
+  title: String!
+  path: String!
+  author: String!
+  content: [ParagraphInterface]
+}
