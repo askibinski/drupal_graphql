@@ -1,0 +1,30 @@
+################################################################################
+# The base schema                                                  #
+#                                                                              #
+# This file contains the basis of the API Schema.
+#                                                                              #
+# Comments aimed at schema developers are prefixed with `#` and comments       #
+# exposed to schema consumers are contained in `"""`.                          #
+#                                                                              #
+################################################################################
+
+# The actual GraphQL schema.
+schema {
+  query: Query
+}
+
+"""
+The schema's entry-point for queries. This acts as the public, top-level API
+from which all queries must start.
+"""
+type Query
+
+"""
+Common interfaces.
+"""
+
+interface NodeInterface {
+  id: Int!
+  title: String!
+  author: String!
+}

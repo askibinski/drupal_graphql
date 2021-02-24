@@ -1,0 +1,11 @@
+interface MediaInterface {
+  id: Int!
+}
+
+type Image implements MediaInterface {
+  id: Int!
+  url: String!
+  width: Int!
+  height: Int!
+  alt: String!
+}
